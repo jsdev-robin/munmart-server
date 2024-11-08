@@ -75,6 +75,7 @@ const {
   CLIENT_URL = '',
   GOOGLE_CALLBACK_URL = '',
   GITHUB_CALLBACK_URL = '',
+  IPINFO_KEY = '',
 } = env;
 
 const ISPRODUCTION = NODE_ENV === 'production';
@@ -109,6 +110,7 @@ const EnvConfig = {
   CLIENT_URL,
   GOOGLE_CALLBACK_URL,
   GITHUB_CALLBACK_URL,
+  IPINFO_KEY,
 };
 
 export default EnvConfig;

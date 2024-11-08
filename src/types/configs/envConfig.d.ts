@@ -26,4 +26,5 @@ export interface ProcessEnv {
   CLIENT_URL?: string;
   GOOGLE_CALLBACK_URL?: string;
   GITHUB_CALLBACK_URL?: string;
+  IPINFO_KEY?: string;
 }

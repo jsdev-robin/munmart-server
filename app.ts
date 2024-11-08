@@ -41,7 +41,7 @@ app.use(useragent.express());
 // Get req  location
 app.use(
   ipinfo({
-    token: 'ea91071c3300bc',
+    token: EnvConfig.IPINFO_KEY,
     cache: null,
     timeout: 5000,
     ipSelector: defaultIPSelector,
