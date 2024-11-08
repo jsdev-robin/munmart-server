@@ -15,31 +15,17 @@ import Status from '../utils/status';
 import { EncryptedData } from '../types/services/utils';
 import { commonOptions } from '../utils/cookieOptions';
 import redisClient from '../configs/ioredis';
+import AuthMixinService from './AuthMixinService';
 
 class UserAuthService<T extends IUser> extends Utils {
   private readonly Model: Model<T>;
+  private readonly authService: AuthMixinService<T>;
 
   constructor(Model: Model<T>) {
     super();
     this.Model = Model;
+    this.authService = new AuthMixinService<T>(Model);
   }
-
-  private readonly handleExistingEmail = async (
-    email: string,
-    next: NextFunction
-  ): Promise<boolean> => {
-    const existingUser = await this.Model.findOne({ email });
-    if (existingUser) {
-      next(
-        new ApiError(
-          'This email is already registered. Use a different email address.',
-          HttpStatusCode.BAD_REQUEST
-        )
-      );
-      return true;
-    }
-    return false;
-  };
 
   async sessionToken(
     req: Request,
@@ -116,7 +102,7 @@ class UserAuthService<T extends IUser> extends Utils {
       }
 
       // Check if the email is already registered
-      if (await this.handleExistingEmail(email, next)) return;
+      if (await this.authService.handleExistingEmail(email, next)) return;
 
       // Prepare the user object with encrypted password
       const newUser = {
@@ -250,7 +236,7 @@ class UserAuthService<T extends IUser> extends Utils {
       const { fname, lname, email, password } = decoded.payload;
 
       // Verify email is not already registered
-      if (await this.handleExistingEmail(email, next)) return;
+      if (await this.authService.handleExistingEmail(email, next)) return;
 
       // Create a new user with verified status
       const newUser = await this.Model.create({

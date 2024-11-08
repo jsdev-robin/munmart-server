@@ -1,5 +1,4 @@
-// src/@types/express-ipinfo.d.ts
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Request } from 'express';
 
 declare module 'express-serve-static-core' {
@@ -12,7 +11,7 @@ declare module 'express-serve-static-core' {
       loc: string;
       postal: string;
       timezone: string;
-      [key: string]: any; // Allow for other properties as needed
+      [key: string]: any;
     };
   }
 }

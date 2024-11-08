@@ -35,19 +35,6 @@ app.use(
   })
 );
 
-// Get user device info
-app.use(useragent.express());
-
-// Get req  location
-app.use(
-  ipinfo({
-    token: EnvConfig.IPINFO_KEY,
-    cache: null,
-    timeout: 5000,
-    ipSelector: defaultIPSelector,
-  })
-);
-
 // Proxy middleware
 app.set('trust proxy', 1);
 
@@ -80,6 +67,19 @@ const limiter = rateLimit({
   },
 });
 app.use(limiter);
+
+// Get user device info
+app.use(useragent.express());
+
+// Get req  location
+app.use(
+  ipinfo({
+    token: EnvConfig.IPINFO_KEY,
+    cache: null,
+    timeout: 5000,
+    ipSelector: defaultIPSelector,
+  })
+);
 
 // Session management with a secure store
 app.use(
