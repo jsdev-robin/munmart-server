@@ -51,8 +51,8 @@ const userSchema = new Schema<IUser>(
     },
     twoFactorEnabled: {
       type: Boolean,
-      select: false,
       default: false,
+      select: false,
     },
     accountStatus: {
       type: {
@@ -77,6 +77,14 @@ const userSchema = new Schema<IUser>(
             default: '',
           },
           disabledAt: { type: Date, default: Date.now },
+        },
+      },
+      default: {
+        banned: { isBanned: false, bannedReason: '', bannedAt: Date.now() },
+        disabled: {
+          isAccountDisabled: false,
+          disabledReason: '',
+          disabledAt: Date.now(),
         },
       },
       select: false,
@@ -267,7 +275,6 @@ userSchema.methods.unbanAccount = async function (this: IUser): Promise<IUser> {
   return await this.save();
 };
 
-// Update login IP address method
 // Update login IP address method
 userSchema.methods.updateLoginIp = async function (
   this: IUser,

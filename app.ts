@@ -7,6 +7,8 @@ import cors from 'cors';
 import path from 'path';
 import helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
+import useragent from 'express-useragent';
+import ipinfo, { defaultIPSelector } from 'ipinfo-express';
 
 import ApiError from './src/middlewares/error/ApiError';
 import HttpStatusCode from './src/utils/httpStatusCode';
@@ -30,6 +32,19 @@ app.use(
   cors({
     origin: true,
     credentials: true,
+  })
+);
+
+// Get user device info
+app.use(useragent.express());
+
+// Get req  location
+app.use(
+  ipinfo({
+    token: 'ea91071c3300bc',
+    cache: null,
+    timeout: 5000,
+    ipSelector: defaultIPSelector,
   })
 );
 

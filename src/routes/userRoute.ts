@@ -11,4 +11,18 @@ router.post(
   userAuthController.signup
 );
 
+router.post(
+  '/verify-email',
+  validationMiddleware.activationSchema,
+  runSchema,
+  userAuthController.verifyAccount
+);
+
+router.post(
+  '/signin',
+  validationMiddleware.signinSchema,
+  runSchema,
+  userAuthController.signin
+);
+
 export default router;

@@ -43,7 +43,7 @@ const activationSchema: ValidationChain[] = [
     ),
 ];
 
-const SigninSchema: ValidationChain[] = [
+const signinSchema: ValidationChain[] = [
   check('email')
     .notEmpty()
     .withMessage('Email is required')
@@ -56,7 +56,7 @@ const SigninSchema: ValidationChain[] = [
 const validationMiddleware = {
   signupSchema,
   activationSchema,
-  SigninSchema,
+  signinSchema,
 };
 
 export default validationMiddleware;

@@ -15,3 +15,11 @@ export interface IVerifyAccountRequest extends Request {
     otp: string;
   };
 }
+
+export interface IUserSigninRequest extends Request {
+  body: {
+    email: string;
+    password: string;
+    rememberMe?: boolean;
+  };
+}
