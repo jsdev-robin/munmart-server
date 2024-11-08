@@ -1,9 +1,14 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "ts-node-dev --respawn --transpile-only server.ts",
+    "start": "node dist/server.js",
+    "start:prod": "NODE_ENV=production ts-node-dev --respawn --transpile-only server.ts",
+    "build": "tsc",
+    "jsdoc": "npx jsdoc -c jsdoc.json",
+    "debug": "ndb dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -65,6 +70,8 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.6.0",
+    "jsdoc": "^4.0.4",
+    "typedoc": "^0.26.11",
     "typescript": "^5.6.3"
   }
 }

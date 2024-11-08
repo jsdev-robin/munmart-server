@@ -1,0 +1,18 @@
+{
+  "source": {
+    "include": ["src"],
+    "includePattern": ".ts$",
+    "excludePattern": "(node_modules/|docs|views)"
+  },
+  "recurseDepth": 10,
+  "opts": {
+    "destination": "./jsdoc",
+    "recurse": true,
+    "readme": "./readme.md"
+  },
+  "plugins": ["plugins/markdown"],
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": true
+  }
+}
